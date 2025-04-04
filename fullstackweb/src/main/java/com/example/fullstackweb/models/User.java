@@ -28,15 +28,10 @@ public class User {
     @Column(name = "status")
     private int status;
 
-    public User(){}
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Cart cart;
 
-    public User(String userName, String password, String email, String fullName, String numberPhone) {
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.fullName = fullName;
-        this.numberPhone = numberPhone;
-    }
+    public User(){}
 
     public int getId() {
         return id;
@@ -92,6 +87,14 @@ public class User {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
 

@@ -3,30 +3,25 @@ package com.example.fullstackweb.service;
 import com.example.fullstackweb.models.User;
 import com.example.fullstackweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+
+import static com.example.fullstackweb.models.Status.FAIL;
+import static com.example.fullstackweb.models.Status.SUCCESS;
 
 @Service
 public class UserService {
-    public static final byte SUCCESS = 1;
-    public static final byte FAIL = 0;
-    public static final byte ERROR = -1;
 
     @Autowired
     UserRepository userRepository;
 
     // create user
-    public byte createUser(@RequestBody User user) {
-        if (user.getUserName().trim().isEmpty() || user.getPassword().trim().isEmpty()) {
-            return ERROR;
-        }
-
-        Optional<User> existingUser = userRepository.findByUserName(user.getUserName());
-        if (existingUser.isPresent()) {
-            return FAIL;
-        } else {
+    public Boolean createUser(@RequestBody User user) {
         User newUser = new User();
         newUser.setUserName(user.getUserName());
         newUser.setPassword(user.getPassword());
@@ -36,16 +31,31 @@ public class UserService {
         newUser.setStatus(1);
         userRepository.save(newUser);
 
-        return SUCCESS;
-        }
+        return true;
     }
 
+    // exist user name
+    public Boolean checkUserName(String userName) {
+        return userRepository.existsByUserName(userName);
+    }
+
+
     // login
-    public byte loginUser(@RequestBody User user) {
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User user) {
         Optional<User> newUser = userRepository.findByUserName(user.getUserName());
+
+        Map<String, Object> response = new HashMap<>();
         if (newUser.isPresent() && newUser.get().getPassword().equals(user.getPassword())) {
-            return SUCCESS;
+            int status = newUser.get().getStatus();
+            int id = newUser.get().getId();
+
+            response.put("Status", SUCCESS);
+            response.put("Id", id);
+            response.put("UStatus", status);
+
+            return ResponseEntity.ok(response);
         }
-        return FAIL;
+        response.put("Status", FAIL);
+        return ResponseEntity.ok(response);
     }
 }
