@@ -5,6 +5,7 @@ import com.example.fullstackweb.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class ProductService {
     }
 
     // id
-    public Optional<Product> getIdProduct(int id) {
+    public Optional<Product> getIdProduct(Long id) {
         return productRepository.findById(id);
     }
 
@@ -26,9 +27,8 @@ public class ProductService {
     public List<Product> getSearchProducts(String name) {
         if (name != null && !name.isEmpty()) {
             return productRepository.findByNameContainingIgnoreCase(name);
-        } else {
-            return getAllProducts();
         }
+        return getAllProducts();
     }
 
     // cate
