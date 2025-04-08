@@ -47,7 +47,7 @@ public class UserService {
         Map<String, Object> response = new HashMap<>();
         if (newUser.isPresent() && newUser.get().getPassword().equals(user.getPassword())) {
             int status = newUser.get().getStatus();
-            int id = newUser.get().getId();
+            Long id = newUser.get().getId();
 
             response.put("Status", SUCCESS);
             response.put("Id", id);

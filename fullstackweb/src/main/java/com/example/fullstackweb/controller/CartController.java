@@ -13,15 +13,29 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping("/userGet")
-    public ResponseEntity<Cart> getCart(@RequestParam int userId) {
+    public ResponseEntity<Cart> getCart(@RequestParam Long userId) {
         return ResponseEntity.ok(cartService.getCartById(userId));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Cart> addToCart(@RequestParam int userId,
-                                          @RequestParam int productId,
+    public ResponseEntity<Cart> addToCart(@RequestParam Long userId,
+                                          @RequestParam Long productId,
                                           @RequestParam int quantity) {
         return ResponseEntity.ok(cartService.addToCart(userId, productId, quantity));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Cart> updateQuantity(@RequestParam Long userId,
+                                               @RequestParam Long productId,
+                                               @RequestParam int quantity) {
+        Cart cart = cartService.updateQuantity(userId, productId, quantity);
+        return ResponseEntity.ok(cart);
+    }
+
+    @DeleteMapping("/remove")
+    public ResponseEntity<Cart> removeFromCart(@RequestParam Long userId, @RequestParam Long productId) {
+        Cart cart = cartService.removeFromCart(userId, productId);
+        return ResponseEntity.ok(cart);
     }
 }
 

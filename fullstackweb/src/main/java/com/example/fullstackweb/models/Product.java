@@ -1,5 +1,6 @@
 package com.example.fullstackweb.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,7 +8,7 @@ import jakarta.persistence.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -33,12 +34,15 @@ public class Product {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "categoryId")
-    private int categoryId;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+//    @JsonIgnore
+    private Category category;
 
     public Product() {}
 
-    public Product(String name, int price, String flavor, String structure, String decorate, String preserve, String detail, String image, int categoryId) {
+    public Product(Long id, String name, int price, String flavor, String structure, String decorate, String preserve, String detail, String image, Category category) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.flavor = flavor;
@@ -47,14 +51,14 @@ public class Product {
         this.preserve = preserve;
         this.detail = detail;
         this.image = image;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -122,11 +126,11 @@ public class Product {
         this.image = image;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

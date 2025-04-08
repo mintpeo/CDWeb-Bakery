@@ -23,7 +23,7 @@ public class CartService {
     @Autowired
     private UserRepository userRepository;
 
-    public Cart getCartById(int id) {
+    public Cart getCartById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -34,13 +34,13 @@ public class CartService {
         });
     }
 
-    public Cart addToCart(int userId, int productId, int quantity) {
+    public Cart addToCart(Long userId, Long productId, int quantity) {
         Cart cart = getCartById(userId);
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         Optional<CartItem> existingItem = cart.getItems().stream()
-                .filter(item -> item.getProduct().getId() == productId)
+                .filter(item -> item.getProduct().getId().equals(productId))
                 .findFirst();
 
         if (existingItem.isPresent()) {
@@ -52,6 +52,24 @@ public class CartService {
             newItem.setQuantity(quantity);
             cart.getItems().add(newItem);
         }
+        return cartRepository.save(cart);
+    }
+
+    public Cart updateQuantity(Long userId, Long productId, int quantity) {
+        Cart cart = getCartById(userId);
+        cart.getItems().forEach(item -> {
+            if (item.getProduct().getId().equals(productId)) {
+                item.setQuantity(quantity);
+            }
+        });
+
+        return cartRepository.save(cart);
+    }
+
+    public Cart removeFromCart(Long userId, Long productId) {
+        Cart cart = getCartById(userId);
+        cart.getItems().removeIf(item -> item.getProduct().getId().equals(productId));
+
         return cartRepository.save(cart);
     }
 }
