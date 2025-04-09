@@ -68,7 +68,6 @@ public class UserService {
         if (userById.isEmpty()) throw new Exception("User not found: " + userId);
 
         User oldUser = userById.get();
-
         oldUser.setEmail(user.getEmail());
         oldUser.setFullName(user.getFullName());
         oldUser.setNumberPhone(user.getNumberPhone());
