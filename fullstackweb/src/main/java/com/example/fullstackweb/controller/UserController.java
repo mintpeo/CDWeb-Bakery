@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public User updateUser(@RequestParam Long userId  ,@RequestBody User user) throws Exception {
+    public User updateUser(@RequestParam Long userId, @RequestBody User user) throws Exception {
         return userService.updateUser(userId, user);
     }
 //    @GetMapping("/all")
