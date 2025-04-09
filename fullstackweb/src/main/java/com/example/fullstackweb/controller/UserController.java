@@ -23,6 +23,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @GetMapping("/info")
+    public Optional<User> getInfoUser(@RequestParam Long id) {
+        return userService.getInfoUser(id);
+    }
+
     @PostMapping("/create")
     public Boolean createUser(@RequestBody User user) {
         return userService.createUser(user);
@@ -38,6 +43,10 @@ public class UserController {
         return userService.loginUser(user);
     }
 
+    @PutMapping("/update")
+    public User updateUser(@RequestParam Long userId  ,@RequestBody User user) throws Exception {
+        return userService.updateUser(userId, user);
+    }
 //    @GetMapping("/all")
 //    public List<User> getUsers() {
 //        return userRepository.findAll();
@@ -52,31 +61,7 @@ public class UserController {
 //        throw new Exception("User not found: " + id);
 //    }
 //
-//    @PutMapping("/{userId}")
-//    public User updateUser(@PathVariable("userId") int id  ,@RequestBody User user) throws Exception {
-//        Optional<User> userById = userRepository.findById(id);
-//        if (userById.isEmpty()) {
-//            throw new Exception("User not exit: " + id);
-//        }
-//
-//        User oldUser = userById.get();
-//        if (user.getUserName() != null) {
-//            oldUser.setUserName(user.getUserName());
-//        }
-//        if (user.getPassword() != null) {
-//            oldUser.setPassword(user.getPassword());
-//        }
-//        if (user.getEmail() != null) {
-//            oldUser.setEmail(user.getEmail());
-//        }
-//        if (user.getFullName() != null) {
-//            oldUser.setFullName(user.getFullName());
-//        }
-//        if (user.getNumberPhone() != null) {
-//            oldUser.setNumberPhone(user.getNumberPhone());
-//        }
-//        return userRepository.save(oldUser);
-//    }
+
 //
 //    @DeleteMapping("/{userId}")
 //    public String deleteUser(@PathVariable("userId") int id) throws Exception {

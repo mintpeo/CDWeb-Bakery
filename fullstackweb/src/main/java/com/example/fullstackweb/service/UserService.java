@@ -20,6 +20,10 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    public Optional<User> getInfoUser(Long id) {
+        return userRepository.findById(id);
+    }
+
     // create user
     public Boolean createUser(@RequestBody User user) {
         User newUser = new User();
@@ -57,5 +61,20 @@ public class UserService {
         }
         response.put("Status", FAIL);
         return ResponseEntity.ok(response);
+    }
+
+    public User updateUser(Long userId, User user) throws Exception {
+        Optional<User> userById = userRepository.findById(userId);
+        if (userById.isEmpty()) throw new Exception("User not found: " + userId);
+
+        User oldUser = userById.get();
+
+        oldUser.setEmail(user.getEmail());
+        oldUser.setFullName(user.getFullName());
+        oldUser.setNumberPhone(user.getNumberPhone());
+        oldUser.setGender(user.getGender());
+        oldUser.setDate(user.getDate());
+
+        return userRepository.save(oldUser);
     }
 }
