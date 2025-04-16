@@ -40,8 +40,11 @@ public class User {
     @Column(name = "date")
     private LocalDate date;
 
+    @Column(name = "address-default")
+    private Long addressDefault;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Address> addresses = new ArrayList<>();
+    private List<Address> addresses;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
@@ -126,6 +129,14 @@ public class User {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public Long getAddressDefault() {
+        return addressDefault;
+    }
+
+    public void setAddressDefault(Long addressDefault) {
+        this.addressDefault = addressDefault;
     }
 
     public List<Address> getAddresses() {
