@@ -33,6 +33,8 @@ public class UserService {
         newUser.setFullName(user.getFullName());
         newUser.setNumberPhone(user.getNumberPhone());
         newUser.setStatus(1);
+        newUser.setAddressDefault(user.getAddressDefault());
+        newUser.setAddresses(user.getAddresses());
         userRepository.save(newUser);
 
         return true;
@@ -73,7 +75,18 @@ public class UserService {
         oldUser.setNumberPhone(user.getNumberPhone());
         oldUser.setGender(user.getGender());
         oldUser.setDate(user.getDate());
+        oldUser.setAddressDefault(user.getAddressDefault());
 
         return userRepository.save(oldUser);
+    }
+
+    public User updatePass(Long userId, User user) throws Exception {
+        Optional<User> userById = userRepository.findById(userId);
+        if (userById.isEmpty()) throw new Exception("User not found: " + userId);
+
+        User oldUser = userById.get();
+        oldUser.setPassword(user.getPassword());
+
+       return userRepository.save(oldUser);
     }
 }

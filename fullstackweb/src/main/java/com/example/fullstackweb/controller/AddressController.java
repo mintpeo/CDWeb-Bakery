@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/address")
@@ -14,9 +15,14 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
+    @GetMapping("/id")
+    public Optional<Address> getAddress(@RequestParam Long addressId, @RequestParam Long userId) {
+        return addressService.getAddress(addressId, userId);
+    }
+
     @GetMapping("/get")
-    public ResponseEntity<List<Address>> getAddress(@RequestParam Long userId) {
-        List<Address> addresses = addressService.getAddresses(userId);
+    public ResponseEntity<List<Address>> getUserAddress(@RequestParam Long userId) {
+        List<Address> addresses = addressService.getUserAddresses(userId);
         return ResponseEntity.ok(addresses);
     }
 
@@ -29,6 +35,11 @@ public class AddressController {
     public ResponseEntity<String> removeAddress(@RequestParam Long userId, @RequestParam Long addressId) {
         addressService.deleteUserAddress(userId, addressId);
         return ResponseEntity.ok("Address deleted successfully.");
+    }
+
+    @PutMapping("/update")
+    public Address updateAddress(@RequestParam Long userId, @RequestParam Long addressId, @RequestBody Address address) {
+        return addressService.updateAddress(userId, addressId, address);
     }
 
 }
