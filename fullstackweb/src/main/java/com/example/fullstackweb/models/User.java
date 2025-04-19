@@ -1,12 +1,8 @@
 package com.example.fullstackweb.models;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Entity
 @Table(name = "accounts")
@@ -45,6 +41,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Address> addresses;
+
+    @OneToOne
+    @JoinColumn(name = "avatar_id")
+    private Avatar avatar;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
@@ -145,6 +145,14 @@ public class User {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 }
 
