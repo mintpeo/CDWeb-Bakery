@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.example.fullstackweb.models.Status.API;
+
 @RestController
 @RequestMapping("/cart")
+@CrossOrigin(origins = API)
 public class CartController {
     @Autowired
     private CartService cartService;

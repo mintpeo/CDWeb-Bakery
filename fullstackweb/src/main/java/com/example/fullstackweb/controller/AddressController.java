@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.fullstackweb.models.Status.API;
+
 @RestController
 @RequestMapping("/address")
+@CrossOrigin(origins = API)
 public class AddressController {
     @Autowired
     private AddressService addressService;

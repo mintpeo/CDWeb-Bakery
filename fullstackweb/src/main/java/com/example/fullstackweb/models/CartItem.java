@@ -19,9 +19,9 @@ public class CartItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public CartItem() {}
-
     private int quantity;
+
+    public CartItem() {}
 
     public Long getId() {
         return id;

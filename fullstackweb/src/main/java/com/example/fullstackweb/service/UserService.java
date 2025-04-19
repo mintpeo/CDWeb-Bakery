@@ -65,6 +65,7 @@ public class UserService {
         return ResponseEntity.ok(response);
     }
 
+    // update user
     public User updateUser(Long userId, User user) throws Exception {
         Optional<User> userById = userRepository.findById(userId);
         if (userById.isEmpty()) throw new Exception("User not found: " + userId);
@@ -76,6 +77,7 @@ public class UserService {
         oldUser.setGender(user.getGender());
         oldUser.setDate(user.getDate());
         oldUser.setAddressDefault(user.getAddressDefault());
+        oldUser.setAvatar(user.getAvatar());
 
         return userRepository.save(oldUser);
     }
@@ -88,5 +90,15 @@ public class UserService {
         oldUser.setPassword(user.getPassword());
 
        return userRepository.save(oldUser);
+    }
+
+    public User updateAvatar(Long userId, User user) throws Exception {
+        Optional<User> userById = userRepository.findById(userId);
+        if (userById.isEmpty()) throw new Exception("User not found: " + userId);
+
+        User oldUser = userById.get();
+        oldUser.setAvatar(user.getAvatar());
+
+        return userRepository.save(oldUser);
     }
 }

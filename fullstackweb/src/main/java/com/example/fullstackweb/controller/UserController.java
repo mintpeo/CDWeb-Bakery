@@ -52,6 +52,11 @@ public class UserController {
     public User updatePass(@RequestParam Long userId, @RequestBody User user) throws Exception {
         return userService.updatePass(userId, user);
     }
+
+    @PutMapping("/updateAvatar")
+    public User updateAvatar(@RequestParam Long userId, @RequestBody User user) throws Exception {
+        return userService.updateAvatar(userId, user);
+    }
 //    @GetMapping("/all")
 //    public List<User> getUsers() {
 //        return userRepository.findAll();
