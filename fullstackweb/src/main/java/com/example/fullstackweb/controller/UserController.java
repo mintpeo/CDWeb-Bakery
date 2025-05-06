@@ -1,8 +1,10 @@
 package com.example.fullstackweb.controller;
 
+import com.example.fullstackweb.dto.UserDTO;
 import com.example.fullstackweb.models.User;
 import com.example.fullstackweb.repository.UserRepository;
 import com.example.fullstackweb.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +26,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/info")
-    public Optional<User> getInfoUser(@RequestParam Long id) {
+    public UserDTO getInfoUser(@RequestParam Long id) {
         return userService.getInfoUser(id);
     }
 
@@ -39,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User user) {
+    public ResponseEntity<?> loginUser(@RequestBody User user) {
         return userService.loginUser(user);
     }
 
@@ -48,14 +50,19 @@ public class UserController {
         return userService.updateUser(userId, user);
     }
 
-    @PutMapping("/updatePass")
-    public User updatePass(@RequestParam Long userId, @RequestBody User user) throws Exception {
-        return userService.updatePass(userId, user);
-    }
-
     @PutMapping("/updateAvatar")
     public User updateAvatar(@RequestParam Long userId, @RequestBody User user) throws Exception {
         return userService.updateAvatar(userId, user);
+    }
+
+    @PutMapping("/updatePass")
+    public Boolean updatePass(@RequestParam Long userId, String oldPass, String newPass) {
+        return userService.updatePass(userId, oldPass, newPass);
+    }
+
+    @PutMapping("/updateAddressDefault")
+    public Boolean updateAddressDefault(@RequestParam Long userId, Long addressDefaultId) throws Exception {
+        return userService.updateAddressDefault(userId, addressDefaultId);
     }
 //    @GetMapping("/all")
 //    public List<User> getUsers() {

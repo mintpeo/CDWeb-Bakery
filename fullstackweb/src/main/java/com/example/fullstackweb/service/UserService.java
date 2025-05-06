@@ -1,18 +1,14 @@
 package com.example.fullstackweb.service;
 
+import com.example.fullstackweb.dto.LoginResponse;
+import com.example.fullstackweb.dto.UserDTO;
 import com.example.fullstackweb.models.User;
 import com.example.fullstackweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
-
-import static com.example.fullstackweb.models.Status.FAIL;
-import static com.example.fullstackweb.models.Status.SUCCESS;
 
 @Service
 public class UserService {
@@ -20,23 +16,51 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public Optional<User> getInfoUser(Long id) {
-        return userRepository.findById(id);
+//    public Optional<User> getInfoUser(Long id) {
+//        return userRepository.findById(id);
+//    }
+
+    private UserDTO convertToDTO(User user) {
+        return new UserDTO(
+                user.getId(),
+                user.getUserName(),
+                user.getEmail(),
+                user.getFullName(),
+                user.getNumberPhone(),
+                user.getStatus(),
+                user.getGender(),
+                user.getDate(),
+                user.getAddressDefault(),
+                user.getAvatar()
+        );
+    }
+
+    public UserDTO getInfoUser(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return convertToDTO(user);
+        }
+        return null;
     }
 
     // create user
-    public Boolean createUser(@RequestBody User user) {
+    public Boolean createUser(User user) {
         User newUser = new User();
+
         newUser.setUserName(user.getUserName());
         newUser.setPassword(user.getPassword());
         newUser.setEmail(user.getEmail());
         newUser.setFullName(user.getFullName());
         newUser.setNumberPhone(user.getNumberPhone());
         newUser.setStatus(1);
+        newUser.setGender(2);
+        newUser.setDate(user.getDate());
         newUser.setAddressDefault(user.getAddressDefault());
         newUser.setAddresses(user.getAddresses());
-        userRepository.save(newUser);
 
+        userRepository.save(newUser);
         return true;
     }
 
@@ -45,25 +69,19 @@ public class UserService {
         return userRepository.existsByUserName(userName);
     }
 
-
     // login
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User user) {
-        Optional<User> newUser = userRepository.findByUserName(user.getUserName());
-
-        Map<String, Object> response = new HashMap<>();
-        if (newUser.isPresent() && newUser.get().getPassword().equals(user.getPassword())) {
-            int status = newUser.get().getStatus();
+    public ResponseEntity<?> loginUser(User user) {
+        Optional<User> newUser = userRepository.findByUserName(user.getUserName()); // kiem tra username
+        if (newUser.isPresent() && newUser.get().getPassword().equals(user.getPassword())) { // kiem tra password
             Long id = newUser.get().getId();
+            int status = newUser.get().getStatus();
 
-            response.put("Status", SUCCESS);
-            response.put("Id", id);
-            response.put("UStatus", status);
-
+            LoginResponse response = new LoginResponse(id, status);
             return ResponseEntity.ok(response);
         }
-        response.put("Status", FAIL);
-        return ResponseEntity.ok(response);
+        return null;
     }
+
 
     // update user
     public User updateUser(Long userId, User user) throws Exception {
@@ -76,22 +94,11 @@ public class UserService {
         oldUser.setNumberPhone(user.getNumberPhone());
         oldUser.setGender(user.getGender());
         oldUser.setDate(user.getDate());
-        oldUser.setAddressDefault(user.getAddressDefault());
-        oldUser.setAvatar(user.getAvatar());
 
         return userRepository.save(oldUser);
     }
 
-    public User updatePass(Long userId, User user) throws Exception {
-        Optional<User> userById = userRepository.findById(userId);
-        if (userById.isEmpty()) throw new Exception("User not found: " + userId);
-
-        User oldUser = userById.get();
-        oldUser.setPassword(user.getPassword());
-
-       return userRepository.save(oldUser);
-    }
-
+    // update avatar
     public User updateAvatar(Long userId, User user) throws Exception {
         Optional<User> userById = userRepository.findById(userId);
         if (userById.isEmpty()) throw new Exception("User not found: " + userId);
@@ -100,5 +107,29 @@ public class UserService {
         oldUser.setAvatar(user.getAvatar());
 
         return userRepository.save(oldUser);
+    }
+
+    // updata pass
+    public Boolean updatePass(Long userId, String oldPass, String newPass) {
+        Optional<User> userById = userRepository.findById(userId);
+        if (userById.isPresent() && userById.get().getPassword().equals(oldPass)) { // kiem tra password
+            User oldUser = userById.get();
+            oldUser.setPassword(newPass);
+            userRepository.save(oldUser);
+            return true;
+        }
+        return false;
+    }
+
+    // update address default
+    public Boolean updateAddressDefault(Long userId, Long addressDefaultId) throws Exception {
+        Optional<User> userById = userRepository.findById(userId);
+        if (userById.isEmpty()) throw new Exception("User not found: " + userId);
+
+        User oldUser = userById.get();
+        oldUser.setAddressDefault(addressDefaultId);
+
+        userRepository.save(oldUser);
+        return true;
     }
 }
