@@ -1,6 +1,5 @@
 package com.example.fullstackweb.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
