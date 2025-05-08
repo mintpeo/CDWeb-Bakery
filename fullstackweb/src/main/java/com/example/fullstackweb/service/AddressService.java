@@ -28,9 +28,10 @@ public class AddressService {
     }
 
     public List<Address> getUserAddresses(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        return addressRepository.findAllByUser(user);
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//        return addressRepository.findAllByUser(user);
+        return addressRepository.findByUserId(userId);
     }
 
     public Address addAddress(Long userId, Address address) {

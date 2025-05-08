@@ -52,13 +52,13 @@ public class UserService {
         newUser.setUserName(user.getUserName());
         newUser.setPassword(user.getPassword());
         newUser.setEmail(user.getEmail());
-        newUser.setFullName(user.getFullName());
-        newUser.setNumberPhone(user.getNumberPhone());
+//        newUser.setFullName(user.getFullName());
+//        newUser.setNumberPhone(user.getNumberPhone());
         newUser.setStatus(1);
         newUser.setGender(2);
-        newUser.setDate(user.getDate());
-        newUser.setAddressDefault(user.getAddressDefault());
-        newUser.setAddresses(user.getAddresses());
+//        newUser.setDate(user.getDate());
+//        newUser.setAddressDefault(user.getAddressDefault());
+//        newUser.setAddresses(user.getAddresses());
 
         userRepository.save(newUser);
         return true;
