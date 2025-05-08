@@ -1,10 +1,7 @@
 package com.example.fullstackweb.dto;
-import com.example.fullstackweb.models.Address;
 import com.example.fullstackweb.models.Avatar;
-import com.example.fullstackweb.models.Cart;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class UserDTO {
     private Long id;
