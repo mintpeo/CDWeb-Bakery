@@ -25,4 +25,9 @@ public class BankCardController {
     public BankCard addBankCard(@RequestParam Long userId, @RequestBody BankCard bankCard) {
         return bankCardService.addBankCard(userId, bankCard);
     }
+
+    @DeleteMapping("/remove")
+    public Boolean deleteBankCard(@RequestParam Long userId, @RequestParam Long bankCardId) {
+        return bankCardService.deleteBankCard(userId, bankCardId);
+    }
 }

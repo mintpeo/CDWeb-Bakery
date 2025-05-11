@@ -44,7 +44,7 @@ public class AddressService {
 
     public void deleteUserAddress(Long userId, Long addressId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("User (Address) not found"));
 
         Address address = addressRepository.findById(addressId)
                 .orElseThrow(() -> new RuntimeException("Address not found"));
