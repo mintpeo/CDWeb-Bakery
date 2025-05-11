@@ -27,4 +27,19 @@ public class BankCardService {
         bankCard.setUser(user);
         return bankCardRepository.save(bankCard);
     }
+
+    public Boolean deleteBankCard(Long userId, Long bankCardId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User (Bank Card) not found"));
+
+        BankCard bankCard = bankCardRepository.findById(bankCardId)
+                .orElseThrow(() -> new RuntimeException("Bank Card not found"));
+
+        if (!bankCard.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Bank Card does not belong to this user");
+        }
+
+        bankCardRepository.delete(bankCard);
+        return true;
+    }
 }
