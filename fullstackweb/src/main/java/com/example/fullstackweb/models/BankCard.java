@@ -22,8 +22,9 @@ public class BankCard {
     @Column(name = "expiry_year")
     private Integer expiryYear;
 
-    @Column(name = "card_type")
-    private String cardType;
+    @ManyToOne
+    @JoinColumn(name = "card_type")
+    private BankCardType bankCardType;
 
     @ManyToOne
     @JoinColumn(name = "user_id") // khóa ngoại
@@ -72,12 +73,12 @@ public class BankCard {
         this.expiryYear = expiryYear;
     }
 
-    public String getCardType() {
-        return cardType;
+    public BankCardType getBankCardType() {
+        return bankCardType;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setBankCardType(BankCardType bankCardType) {
+        this.bankCardType = bankCardType;
     }
 
     public User getUser() {
