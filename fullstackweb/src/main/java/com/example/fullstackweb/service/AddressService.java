@@ -57,15 +57,26 @@ public class AddressService {
     }
 
     public Address updateAddress(Long userId, Long addressId, Address newAddress) {
-        Address oldAddress = addressRepository.findByIdAndUser_Id(addressId, userId)
-                .orElseThrow(() -> new RuntimeException("Address not found for this user"));
+//        Address oldAddress = addressRepository.findByIdAndUser_Id(addressId, userId)
+//                .orElseThrow(() -> new RuntimeException("Address not found for this user"));
 
-        oldAddress.setName(newAddress.getName());
-        oldAddress.setPhone(newAddress.getPhone());
-        oldAddress.setText(newAddress.getText());
-        oldAddress.setProvince(newAddress.getProvince());
-        oldAddress.setDistrict(newAddress.getDistrict());
-        oldAddress.setWard(newAddress.getWard());
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User (Address) not found"));
+
+        Address oldAddress = addressRepository.findById(addressId)
+                .orElseThrow(() -> new RuntimeException("Address not found"));
+
+        if (!oldAddress.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Address does not belong to this user");
+        } else {
+            oldAddress.setName(newAddress.getName());
+            oldAddress.setPhone(newAddress.getPhone());
+            oldAddress.setText(newAddress.getText());
+            oldAddress.setProvince(newAddress.getProvince());
+            oldAddress.setDistrict(newAddress.getDistrict());
+            oldAddress.setWard(newAddress.getWard());
+        }
+
 
         return addressRepository.save(oldAddress);
     }
