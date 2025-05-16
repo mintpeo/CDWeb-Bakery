@@ -45,6 +45,11 @@ public class UserController {
         return userService.loginUser(user);
     }
 
+    @PostMapping("/verify")
+    public Boolean verifyPass(@RequestBody User user) {
+        return userService.verifyPass(user);
+    }
+
     @PutMapping("/update")
     public User updateUser(@RequestParam Long userId, @RequestBody User user) throws Exception {
         return userService.updateUser(userId, user);

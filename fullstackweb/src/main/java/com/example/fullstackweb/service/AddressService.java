@@ -18,20 +18,17 @@ public class AddressService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<Address> getAddress(Long addressId, Long userId) {
-        return addressRepository.findByIdAndUser_Id(addressId, userId);
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        return user.getAddresses().stream().filter(
-//                address -> address.getId().equals(addressId)).findFirst();
+    public List<Address> getUserAddresses(Long userId) {
+        return addressRepository.findByUserId(userId);
     }
 
-    public List<Address> getUserAddresses(Long userId) {
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//        return addressRepository.findAllByUser(user);
-        return addressRepository.findByUserId(userId);
+    public Optional<Address> getAddress(Long addressId, Long userId) {
+//        return addressRepository.findByIdAndUser_Id(addressId, userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return user.getAddresses().stream().filter(
+                address -> address.getId().equals(addressId)).findFirst();
     }
 
     public Address addAddress(Long userId, Address address) {

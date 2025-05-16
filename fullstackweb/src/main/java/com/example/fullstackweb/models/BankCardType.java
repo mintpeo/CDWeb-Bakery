@@ -12,6 +12,9 @@ public class BankCardType {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "img")
+    private String img;
+
     public int getId() {
         return id;
     }
@@ -26,5 +29,13 @@ public class BankCardType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

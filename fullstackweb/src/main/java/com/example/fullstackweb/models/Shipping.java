@@ -16,7 +16,7 @@ public class Shipping {
     private double fee;
 
     @Column(name = "days")
-    private String days;
+    private int days;
 
     public Shipping() {}
 
@@ -44,11 +44,11 @@ public class Shipping {
         this.fee = fee;
     }
 
-    public String getDays() {
+    public int getDays() {
         return days;
     }
 
-    public void setDays(String days) {
+    public void setDays(int days) {
         this.days = days;
     }
 }
