@@ -18,15 +18,14 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
+    @GetMapping("/get")
+    public List<Address> getUserAddress(@RequestParam Long userId) {
+        return addressService.getUserAddresses(userId);
+    }
+
     @GetMapping("/id")
     public Optional<Address> getAddress(@RequestParam Long addressId, @RequestParam Long userId) {
         return addressService.getAddress(addressId, userId);
-    }
-
-    @GetMapping("/get")
-    public ResponseEntity<List<Address>> getUserAddress(@RequestParam Long userId) {
-        List<Address> addresses = addressService.getUserAddresses(userId);
-        return ResponseEntity.ok(addresses);
     }
 
     @PostMapping("/add")

@@ -82,6 +82,12 @@ public class UserService {
         return null;
     }
 
+    // verify
+    public Boolean verifyPass(User user) {
+        Optional<User> newUser = userRepository.findById(user.getId()); // kiem tra username
+        return newUser.isPresent() && newUser.get().getPassword().equals(user.getPassword()); // kiem tra password
+    }
+
 
     // update user
     public User updateUser(Long userId, User user) throws Exception {

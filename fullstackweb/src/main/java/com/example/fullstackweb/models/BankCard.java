@@ -26,6 +26,12 @@ public class BankCard {
     @JoinColumn(name = "card_type")
     private BankCardType bankCardType;
 
+    @Column(name = "short_name")
+    private String shortName;
+
+    @Column(name = "code")
+    private String code;
+
     @ManyToOne
     @JoinColumn(name = "user_id") // khóa ngoại
     @JsonIgnore
@@ -79,6 +85,22 @@ public class BankCard {
 
     public void setBankCardType(BankCardType bankCardType) {
         this.bankCardType = bankCardType;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public User getUser() {
