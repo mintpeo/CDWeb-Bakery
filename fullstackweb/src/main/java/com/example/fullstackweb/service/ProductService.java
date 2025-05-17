@@ -28,7 +28,7 @@ public class ProductService {
         if (name != null && !name.isEmpty()) {
             return productRepository.findByNameContainingIgnoreCase(name);
         }
-        return getAllProducts();
+        return null;
     }
 
     // cate
@@ -36,13 +36,13 @@ public class ProductService {
         if (categoryId != 0) {
             return productRepository.findByCategoryId(categoryId);
         }
-        return getAllProducts();
+        return null;
     }
 
     // price
     public List<Product> getPriceProducts(int maxPrice) {
         if (maxPrice == 0) {
-            return getAllProducts();
+            return null;
         }
         return productRepository.findByPriceLessThan(maxPrice);
     }
