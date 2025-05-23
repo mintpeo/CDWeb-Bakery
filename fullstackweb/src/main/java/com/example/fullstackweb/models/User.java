@@ -62,6 +62,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BankCard> bankCards;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
     public User(){}
 
     public Long getId() {
@@ -174,6 +177,14 @@ public class User {
 
     public void setBankCards(List<BankCard> bankCards) {
         this.bankCards = bankCards;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
 
