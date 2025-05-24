@@ -6,7 +6,7 @@ public class CheckOutRequest {
     private Long addressId;
     private String paymentMethod;
     private Long cardId; // null nếu COD
-    private Double discountValid;
+    private Double discountAmount;
     private int shippingId;
     private Long totalAmount;
     private List<CheckOutItemRequest> items;
@@ -35,12 +35,12 @@ public class CheckOutRequest {
         this.cardId = cardId;
     }
 
-    public Double getDiscountValid() {
-        return discountValid;
+    public Double getDiscountAmount() {
+        return discountAmount;
     }
 
-    public void setDiscountValid(Double discountValid) {
-        this.discountValid = discountValid;
+    public void setDiscountAmount(Double discountAmount) {
+        this.discountAmount = discountAmount;
     }
 
     public int getShippingId() {
