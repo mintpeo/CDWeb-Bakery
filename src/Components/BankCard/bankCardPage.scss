@@ -1,0 +1,296 @@
+.bank-container {
+    .bank-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--whiteColorDeam);
+
+        h2 {
+            color: var(--blackColor);
+            font-weight: 600;
+        }
+
+        .add-btn {
+            background-color: var(--PrimaryColor);
+            color: var(--whiteColor);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+
+
+    }
+
+    .blank-list {
+        height: 200px;
+    }
+
+    .address-item {
+        border-bottom: 1px solid var(--whiteColorDeam);
+        // padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+
+        .info {
+            .name {
+                font-weight: 700;
+                text-transform: uppercase;
+                color: var(--blackColor);
+                margin-bottom: 0.3rem;
+            }
+
+            .card {
+                white-space: pre-line;
+                font-size: 1.1rem;
+                color: var(--textColor);
+                margin-left: 0.5rem;
+                // margin-left: auto;
+
+                .exp {
+                    margin-left: 1rem;
+                }
+
+                .type {
+                    margin-left: 1rem;
+                }
+            }
+
+            .tags {
+                display: flex;
+                gap: 0.5rem;
+
+                .tag {
+                    padding: 2px 8px;
+                    font-size: 0.75rem;
+                    border-radius: 3px;
+                    border: 1px solid var(--greyText);
+                    color: var(--textColor);
+
+                    &.default {
+                        background-color: var(--PrimaryColor);
+                        color: var(--whiteColor);
+                        border: none;
+                    }
+                }
+            }
+        }
+
+        .actions {
+            text-align: right;
+
+            .top-actions {
+                margin-bottom: 0.5rem;
+
+                button {
+                    background: none;
+                    border: none;
+                    color: var(--SecondaryColor);
+                    font-size: 1rem;
+                    cursor: pointer;
+                    margin-left: 0.5rem;
+                    display: flex;
+                    align-items: center;
+
+                    .icon-check {
+                        font-size: 1rem;
+                        margin-right: .3rem;
+                    }
+
+                    &.check {
+                        color: var(--SecondaryColor);
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .set-default-btn {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+                border: 1px solid var(--textColor);
+                background-color: transparent;
+                border-radius: 4px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--whiteColorDeam);
+                }
+            }
+
+            button:disabled {
+                opacity: 0;
+                cursor: auto;
+
+                .icon {
+                    opacity: 0;
+                    cursor: auto;
+                }
+            }
+        }
+    }
+
+    .modal-pass {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 999;
+
+        .modal-content {
+            background: var(--whiteColor);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 400px;
+
+            input {
+                margin-top: 1rem;
+                width: 95%;
+                padding: .5rem;
+            }
+
+            .error {
+                color: red;
+                font-size: 0.9rem;
+            }
+
+            .modal-actions-pass {
+                // margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+
+                .submit {
+                    background: var(--PrimaryColor);
+                    color: var(--whiteColor);
+                    border: none;
+                    padding: 0.6rem 1.2rem;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .bank-selected {
+        .btn {
+            color: var(--whiteColor);
+
+            &:hover {
+                color: var(--SecondaryColor);
+            }
+        }
+
+        .bank-card-cover {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            .bank-card {
+                width: 360px;
+                height: 220px;
+                border-radius: 16px;
+                background: linear-gradient(135deg, #1e3c72, #2a5298);
+                color: var(--whiteColor);
+                padding: 20px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                &__header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                &__logo {
+                    width: 150px;
+                    height: 50px;
+                    background-color: var(--whiteColor);
+                }
+
+                &__logo__credit {
+                    width: 80px;
+                    height: 50px;
+                    background-color: var(--whiteColor);
+                }
+
+                &__bank-name {
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                }
+
+                &__number {
+                    letter-spacing: 3px;
+                    font-size: 1.4rem;
+                    text-align: center;
+                }
+
+                &__footer {
+                    display: flex;
+                    justify-content: space-between;
+
+                    label {
+                        font-size: 0.7rem;
+                        text-transform: uppercase;
+                        opacity: 0.7;
+                    }
+                }
+
+                &__info {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                &__name,
+                &__expiry {
+                    font-size: 1.2rem;
+                    margin-top: 4px;
+                }
+            }
+        }
+
+        .actions {
+            .top-actions {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                button {
+                    width: 120px;
+                    height: 50px;
+                    border-radius: 10px;
+                    color: var(--whiteColor);
+                    font-size: 1rem;
+                    cursor: pointer;
+                    align-items: center;
+
+                    &:hover {
+                        color: red;
+                    }
+
+                    .icon-check {
+                        font-size: 1rem;
+                        margin-right: .3rem;
+                    }
+                }
+            }
+        }
+    }
+}

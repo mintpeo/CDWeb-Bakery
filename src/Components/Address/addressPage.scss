@@ -1,0 +1,132 @@
+.address-container {
+    // background-color: var(--whiteColor);
+    // padding: 2rem;
+    // border-radius: 6px;
+    // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+    .address-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--whiteColorDeam);
+
+        h2 {
+            color: var(--blackColor);
+            font-weight: 600;
+        }
+
+        .add-btn {
+            background-color: var(--PrimaryColor);
+            color: var(--whiteColor);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+
+
+    }
+
+    .address-item {
+        border-bottom: 1px solid var(--whiteColorDeam);
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+
+        .info {
+            .name {
+                font-weight: 700;
+                // text-transform: uppercase;
+                color: var(--blackColor);
+                margin-bottom: 0.3rem;
+
+                .phone {
+                    margin-left: 1rem;
+                    color: var(--textColor);
+                }
+            }
+
+            .address {
+                white-space: pre-line;
+                font-size: 0.9rem;
+                color: var(--textColor);
+                margin-bottom: 0.5rem;
+            }
+
+            .tags {
+                display: flex;
+                gap: 0.5rem;
+
+                .tag {
+                    padding: 2px 8px;
+                    font-size: 0.75rem;
+                    border-radius: 3px;
+                    border: 1px solid var(--greyText);
+                    color: var(--textColor);
+
+                    &.default {
+                        background-color: var(--PrimaryColor);
+                        color: var(--whiteColor);
+                        border: none;
+                    }
+                }
+            }
+        }
+
+        .actions {
+            text-align: right;
+
+            .top-actions {
+                margin-bottom: 0.5rem;
+
+                button {
+                    background: none;
+                    border: none;
+                    color: var(--SecondaryColor);
+                    font-size: 0.85rem;
+                    cursor: pointer;
+                    margin-left: 0.5rem;
+
+                    &.delete {
+                        color: red;
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .set-default-btn {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+                border: 1px solid var(--textColor);
+                background-color: transparent;
+                border-radius: 4px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--whiteColorDeam);
+                }
+            }
+
+            button:disabled {
+                opacity: 0;
+                cursor: auto;
+
+                .icon {
+                    opacity: 0;
+                    cursor: auto;
+                }
+            }
+        }
+    }
+}

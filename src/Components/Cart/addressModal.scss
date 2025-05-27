@@ -1,0 +1,169 @@
+.address-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.2) !important;
+
+    .address-modal-container {
+        background-color: var(--whiteColor);
+        width: 50%;
+        height: 45%;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+        .address-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--whiteColorDeam);
+
+            h2 {
+                color: var(--blackColor);
+                font-weight: 600;
+                margin: 0 !important;
+            }
+
+            .add-btn {
+                background-color: var(--PrimaryColor);
+                color: var(--whiteColor);
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                border: none;
+                cursor: pointer;
+                transition: 0.2s ease;
+
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
+
+
+        }
+
+        .address-modal-item {
+            border-bottom: 1px solid var(--whiteColorDeam);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+
+            .info-modal {
+                .name {
+                    font-weight: 700;
+                    // text-transform: uppercase;
+                    color: var(--blackColor);
+                    margin-right: 1rem;
+                    padding-right: 1rem;
+                    border-right: 1px solid var(--PrimaryColor);
+
+                    .phone {
+                        margin-left: 1rem;
+                        color: var(--textColor);
+                    }
+                }
+
+                .address {
+                    white-space: pre-line;
+                    font-size: 0.9rem;
+                    color: var(--textColor);
+                    margin-bottom: 0.5rem;
+                }
+
+                .tags {
+                    display: flex;
+                    gap: 0.5rem;
+
+                    .tag {
+                        padding: 2px 8px;
+                        font-size: 0.75rem;
+                        border-radius: 3px;
+                        border: 1px solid var(--greyText);
+                        color: var(--textColor);
+
+                        &.default {
+                            background-color: var(--PrimaryColor);
+                            color: var(--whiteColor);
+                            border: none;
+                        }
+                    }
+                }
+            }
+
+            .actions {
+                text-align: right;
+
+                .top-actions {
+                    margin-bottom: 0.5rem;
+
+                    input {
+                        cursor: pointer;
+                    }
+
+                    button {
+                        background: none;
+                        border: none;
+                        color: var(--SecondaryColor);
+                        font-size: 0.85rem;
+                        cursor: pointer;
+                        margin-left: 0.5rem;
+
+                        &.delete {
+                            color: red;
+                        }
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+                .set-default-btn {
+                    font-size: 0.8rem;
+                    padding: 4px 10px;
+                    border: 1px solid var(--textColor);
+                    background-color: transparent;
+                    border-radius: 4px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: var(--whiteColorDeam);
+                    }
+                }
+
+                button:disabled {
+                    opacity: 0;
+                    cursor: auto;
+
+                    .icon {
+                        opacity: 0;
+                        cursor: auto;
+                    }
+                }
+            }
+        }
+
+        .modal-actions {
+            button {
+                width: 100%;
+                padding: 0.75rem;
+                background: var(--gradientColor);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: opacity 0.3s;
+            }
+        }
+    }
+}

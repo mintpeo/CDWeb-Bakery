@@ -1,0 +1,87 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    background: var(--whiteColor);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 500px;
+    max-width: 95%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 5rem;
+}
+
+.modal h2 {
+    margin-bottom: 1rem;
+    color: var(--blackColor);
+    // text-align: left;
+}
+
+.bank-form-group {
+    // display: flex;
+    gap: 1rem;
+    // margin-bottom: 1rem;
+
+    input {
+        // flex: 2;
+        padding: 0.6rem;
+        border: 1px solid var(--greyText);
+        border-radius: 4px;
+        width: 100%;
+        margin-bottom: 1rem;
+        margin-top: .2rem;
+        text-transform: uppercase;
+    }
+}
+
+select,
+textarea {
+    margin-top: 0.2rem;
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--greyText);
+    border-radius: 4px;
+    resize: none;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    .cancel {
+        background: transparent;
+        border: none;
+        color: var(--textColor);
+        cursor: pointer;
+    }
+
+    .submit {
+        background: var(--PrimaryColor);
+        color: var(--whiteColor);
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: .3;
+            cursor: not-allowed;
+
+            .icon {
+                opacity: .3;
+                cursor: not-allowed;
+            }
+        }
+    }
+}

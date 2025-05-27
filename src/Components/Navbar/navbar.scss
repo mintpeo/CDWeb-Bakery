@@ -1,0 +1,252 @@
+.header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--whiteColorDeam);
+    width: 100%;
+    padding: 1rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
+
+    .logo {
+        color: var(--blackColor);
+        font-weight: 600;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+
+        .icon {
+            font-size: 25px;
+            color: var(--PrimaryColor);
+            transform: translateY(5px);
+        }
+    }
+
+    .navLists {
+        .navItem {
+            .navLink {
+                display: flex;
+                align-items: center;
+                position: relative;
+
+                .iconItem {
+                    font-size: 16px;
+                    margin-right: 3px;
+                }
+
+                .cart-badge {
+                    position: absolute;
+                    top: -8px;
+                    right: -10px;
+                    background-color: red;
+                    color: white;
+                    border-radius: 50%;
+                    width: 18px;
+                    height: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .showsubnav {
+            position: relative;
+
+            .btnUser {
+                width: 60px;
+                height: 60px;
+                margin: auto;
+                border-radius: 50%;
+                overflow: hidden;
+                background-color: var(--inputColor);
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .iconBtn {
+                    font-size: 20px;
+                    display: flex;
+                    align-items: center;
+                    color: var(--whiteColor);
+                }
+
+                &:hover .iconBtn {
+                    color: var(--SecondaryColor);
+                }
+
+                &:hover .subnav {
+                    display: block;
+                }
+            }
+
+            .subnav {
+                display: none;
+                position: absolute;
+                text-align: center;
+                top: 100%;
+                left: -60px;
+                min-width: 180px;
+                background-color: var(--whiteColorDeam);
+                box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
+
+                a {
+                    color: var(--blackColor);
+                    line-height: 38px;
+                    font-size: 0.9rem;
+                }
+
+                .menuItem {
+                    cursor: pointer;
+                }
+
+                .menuItem a:hover {
+                    color: var(--SecondaryColor);
+                }
+            }
+        }
+    }
+
+
+    @media screen and (max-width: 768px) {
+        .navBar {
+            position: absolute;
+            background: var(--whiteColorDeam);
+            height: max-content;
+            width: 88%;
+            border-radius: 1rem;
+            top: -500rem;
+            left: 50%;
+            padding: 1rem;
+            transform: translate(-50%);
+            z-index: 2000;
+            box-shadow: 0 2px 4px rgba(2, 15, 29, 0.904);
+            transition: .5s ease-in-out;
+
+            .navLists {
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                padding: .5rem 0;
+
+                .navItem {
+                    padding: .5rem 0;
+
+                    .navLink {
+                        color: var(--textColor);
+                        font-size: .9rem;
+                        font-weight: 600;
+
+                        &:hover {
+                            color: var(--PrimaryColor);
+                        }
+                    }
+                }
+
+                .btn {
+                    margin-top: 1rem;
+
+                    a {
+                        font-weight: 600;
+                        // color: var(--whiteColor);
+                    }
+                }
+            }
+
+            .closeNavbar {
+                position: absolute;
+                top: 1rem;
+                right: 1.5rem;
+                color: var(--PrimaryColor);
+
+                &:hover {
+                    color: var(--SecondaryColor);
+                }
+            }
+        }
+
+        .activeNavbar {
+            top: 7rem;
+        }
+    }
+
+    .toggleNavbar {
+        .icon {
+            font-size: 25px;
+            color: var(--PrimaryColor);
+        }
+
+        &:hover.icon {
+            color: var(--SecondaryColor);
+        }
+    }
+}
+
+//Media
+@media screen and (min-width: 769px) {
+
+    .toggleNavbar,
+    .closeNavbar {
+        display: none;
+    }
+
+    .header {
+        padding: 1.5rem 2rem;
+
+        .navBar {
+            .navLists {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+
+                .navItem {
+                    .navLink {
+                        color: var(--textColor);
+                        padding: 0 0.45rem;
+                        font-size: 0.9rem;
+                        font-weight: 500;
+
+                        &:hover {
+                            color: var(--PrimaryColor);
+                        }
+                    }
+                }
+
+                .btn {
+                    margin-left: 1rem;
+
+                    a {
+                        // color: var(--whiteColor);
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: 960px) {
+    .header {
+        .navBar {
+            .navLists {
+                .navItem {
+                    padding: 0 0.7rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1240px) {
+    .header {
+        padding: 1rem 8.5rem;
+    }
+}

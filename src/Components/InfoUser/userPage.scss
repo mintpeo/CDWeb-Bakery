@@ -1,0 +1,21 @@
+.info-page {
+    background-color: var(--bodyColor);
+    padding: 2rem;
+    margin-bottom: 200px;
+
+    .info-container {
+        margin: auto;
+        margin-top: 80px;
+        display: flex;
+        max-width: 1200px;
+        background: var(--whiteColor);
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+
+        .form-area {
+            flex: 1;
+            padding: 2rem;
+        }
+    }
+}

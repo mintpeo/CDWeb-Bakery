@@ -1,0 +1,120 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    background: var(--whiteColor);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 500px;
+    max-width: 95%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 5rem;
+}
+
+.modal h2 {
+    margin-bottom: 1rem;
+    color: var(--blackColor);
+    // text-align: left;
+}
+
+.form-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    input {
+        flex: 1;
+        padding: 0.6rem;
+        border: 1px solid var(--greyText);
+        border-radius: 4px;
+        width: 50%;
+    }
+}
+
+select,
+textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--greyText);
+    border-radius: 4px;
+    resize: none;
+}
+
+.map-area {
+    background-color: var(--inputColor);
+    height: 100px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .add-location {
+        background: transparent;
+        border: 1px dashed var(--textColor);
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+    }
+}
+
+.address-type {
+    margin-bottom: 1rem;
+
+    span {
+        margin-right: 1rem;
+        color: var(--textColor);
+    }
+
+    button {
+        margin-right: 0.5rem;
+        padding: 0.4rem 1rem;
+        border: 1px solid var(--greyText);
+        background: transparent;
+        cursor: pointer;
+        border-radius: 4px;
+
+        &:hover {
+            border-color: var(--PrimaryColor);
+        }
+    }
+}
+
+.default-checkbox {
+    margin-bottom: 1rem;
+
+    label {
+        margin-left: 0.4rem;
+        color: var(--textColor);
+    }
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    .cancel {
+        background: transparent;
+        border: none;
+        color: var(--textColor);
+        cursor: pointer;
+    }
+
+    .submit {
+        background: var(--PrimaryColor);
+        color: var(--whiteColor);
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+}

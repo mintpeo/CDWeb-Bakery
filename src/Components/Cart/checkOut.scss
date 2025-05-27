@@ -1,0 +1,291 @@
+.payment-container {
+    max-width: 700px;
+    margin: 0rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: var(--whiteColor);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding-top: 110px;
+
+    h2 {
+        color: var(--PrimaryColor);
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+        align-items: center;
+
+        label {
+            display: block ruby;
+            color: var(--blackColor);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        input {
+            width: 30rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background-color: var(--inputColor);
+            font-size: 1rem;
+        }
+    }
+
+    .payment-methods {
+        display: flex;
+        gap: 1.5rem;
+        // margin-top: 0.5rem;
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+
+            input {
+                width: 3rem !important;
+            }
+        }
+    }
+
+    .submit-button {
+        width: 100%;
+        padding: 0.75rem;
+        background: var(--gradientColor);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: opacity 0.3s;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    .cart-items {
+        margin-bottom: 2rem;
+
+        h3 {
+            color: var(--blackColor);
+            margin-bottom: 1rem;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--whiteColorDeam);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+
+            img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
+            .details {
+                flex: 1;
+                margin-left: 1rem;
+
+                .name {
+                    font-weight: 600;
+                    margin-bottom: 0.3rem;
+                }
+
+                .quantity {
+                    color: var(--blackColor);
+                    font-size: 0.9rem;
+                }
+            }
+
+            .price {
+                font-weight: bold;
+                color: var(--PrimaryColor);
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.1rem;
+        font-weight: bold;
+        // margin-top: 1rem;
+        color: var(--PrimaryColor);
+    }
+
+    .form-group-row {
+        display: flex;
+        gap: 1rem;
+
+        .form-group {
+            flex: 1;
+            width: 0rem !important;
+            align-items: center;
+
+            label {
+                margin: 0rem !important;
+            }
+        }
+    }
+
+    .card-info {
+        margin-bottom: 1.5rem;
+    }
+
+    .saved-card {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+
+        label {
+            cursor: pointer;
+        }
+
+        input {
+            width: 5rem !important;
+        }
+
+        .text {
+            width: 400px;
+
+            .name {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .add-card-btn {
+        margin-top: 0.5rem;
+        background-color: var(--SecondaryColor);
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--PrimaryColor);
+        }
+    }
+
+    .shipping-options {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label {
+            font-weight: 400;
+            color: var(--textColor);
+
+            input {
+                width: 3rem !important;
+            }
+
+            p {
+                padding-left: 1rem;
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .totalProduct {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+        font-weight: bold;
+        // margin-top: 1rem;
+        color: var(--blackColor);
+    }
+
+    .coupon-section {
+        display: flex;
+        gap: 0.5rem;
+        // margin-top: 0.5rem;
+
+        input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--greyText);
+            border-radius: 4px;
+        }
+
+        input:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        button {
+            background: var(--SecondaryColor);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0rem !important;
+            // width: 100%;
+            padding: 0.5rem 1.1rem;
+        }
+    }
+
+    .discount-applied {
+        color: green;
+        margin-top: 0.5rem;
+        font-weight: bold;
+    }
+
+    .address-item {
+        border-bottom: 1px solid var(--whiteColorDeam);
+        // padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+
+        .info {
+            .name {
+                font-weight: 700;
+                // text-transform: uppercase;
+                color: var(--blackColor);
+                margin-right: 1rem;
+                padding-right: 1rem;
+                border-right: 1px solid var(--PrimaryColor);
+
+
+            }
+
+            .phone {
+                // margin-left: 1rem;
+                color: var(--blackColor);
+                opacity: 0.5;
+            }
+
+            .address {
+                white-space: pre-line;
+                font-size: 0.9rem;
+                color: var(--textColor);
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        button {
+            background-color: var(--SecondaryColor);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0px !important;
+        }
+    }
+}

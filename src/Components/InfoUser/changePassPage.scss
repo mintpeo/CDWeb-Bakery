@@ -1,0 +1,90 @@
+.info-header {
+    border-bottom: 1px solid var(--whiteColorDeam);
+    padding-bottom: 1rem;
+
+    h2 {
+        color: var(--blackColor);
+        margin-bottom: 0.25rem;
+    }
+
+    p {
+        color: var(--textColor);
+    }
+}
+
+.info-form {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+
+    .form-left-change {
+        flex: 1;
+        padding-right: 2rem;
+
+        >div {
+            margin-bottom: 1rem;
+
+            label {
+                font-weight: 500;
+                color: var(--blackColor);
+                display: block;
+                margin-bottom: 0.25rem;
+                width: 150px;
+            }
+
+            input[type='password'] {
+                width: 100%;
+                padding: 0.5rem;
+                border: 1px solid var(--inputColor);
+                border-radius: 6px;
+                background-color: var(--inputColor);
+                color: var(--blackColor);
+            }
+
+            p {
+                color: var(--textColor);
+
+                .change-link {
+                    color: var(--PrimaryColor);
+                    font-weight: 500;
+                    cursor: pointer;
+                    margin-left: 1rem;
+                }
+            }
+        }
+
+        .submit-button {
+            background: var(--gradientColor);
+            color: var(--whiteColor);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s ease;
+
+            &:hover {
+                opacity: 0.9;
+            }
+
+        }
+
+        button:disabled {
+            opacity: .3;
+            cursor: not-allowed;
+
+            .icon {
+                opacity: .3;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+.label-form {
+    margin-bottom: 0.25rem;
+}
+
+.p-form {
+    margin: 0 0 0.25rem 2rem;
+}

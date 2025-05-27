@@ -1,0 +1,92 @@
+.avatar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+
+    .modal-content {
+        background: var(--whiteColor);
+        padding: 2rem;
+        border-radius: 12px;
+        width: 500px;
+        max-width: 90%;
+
+        h2 {
+            color: var(--PrimaryColor);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .avatar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            color: var(--blackColor);
+
+            img {
+                width: 70px;
+                height: 70px;
+                margin: 8px;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                cursor: pointer;
+                object-fit: cover;
+                transition: all 0.3s ease;
+
+                &.selected {
+                    border-color: var(--PrimaryColor);
+                    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+                    transform: scale(1.05);
+                }
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        .modal-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+
+            button {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                background-color: var(--PrimaryColor);
+                color: white;
+                font-weight: bold;
+                transition: 0.2s ease;
+
+                &:first-child {
+                    background: var(--greyText);
+                    color: white;
+                }
+
+                &:last-child {
+                    background: var(--PrimaryColor);
+                    color: white;
+                }
+
+                &:disabled {
+                    background-color: var(--greyText);
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+
+                &:not(:disabled):hover {
+                    background-color: var(--SecondaryColor);
+                }
+            }
+        }
+    }
+}
