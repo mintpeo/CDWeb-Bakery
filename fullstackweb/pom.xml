@@ -12,6 +12,7 @@
 	<artifactId>fullstackweb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>fullstackweb</name>
+	<finalName>fullstackweb</finalName>
 	<description>SpringBootProject</description>
 	<url/>
 	<licenses>
