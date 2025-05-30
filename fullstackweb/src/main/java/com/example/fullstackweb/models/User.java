@@ -1,10 +1,7 @@
 package com.example.fullstackweb.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,16 +15,18 @@ public class User {
     private Long id;
 
     @Column(name = "username", nullable=false)
-//    @NotEmpty(message = "User Name ko dc de null")
+    @NotBlank(message = "{user.name.notblank}")
+    @Size(min=6, message = "{user.name.size}")
     private String userName;
 
-    @Column(name = "password", nullable = false)
-//    @Size(min = 8, message = "Password min 8")
-    private String password;
-
     @Column(name = "email")
-    @Email(message = "Email ko hop le")
+    @Email(message = "{user.email.invalid}")
+    @NotBlank(message = "{user.email.notblank}")
     private String email;
+
+    @Column(name = "password", nullable = false)
+    @Size(min = 6, message = "{user.password.size}")
+    private String password;
 
     @Column(name = "fullname")
 //    @Pattern(regexp = "^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+)*$", message = "Tên chỉ được chứa chữ cái và không được có số hoặc ký tự đặc biệt")
