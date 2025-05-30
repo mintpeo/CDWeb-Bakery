@@ -5,17 +5,23 @@ import com.example.fullstackweb.dto.UserDTO;
 import com.example.fullstackweb.models.User;
 import com.example.fullstackweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
+    @Autowired
+    private MessageSource messageSource;
 //    public Optional<User> getInfoUser(Long id) {
 //        return userRepository.findById(id);
 //    }
@@ -62,6 +68,33 @@ public class UserService {
 
         userRepository.save(newUser);
         return true;
+    }
+
+    // create with validation
+    public String register(User user, BindingResult bindingResult) {
+//        String lang;
+//        Locale locale = Locale.forLanguageTag(lang);
+
+        if (bindingResult.hasErrors()) {
+            // Lấy lỗi đầu tiên để đơn giản
+            return bindingResult.getFieldError().getDefaultMessage();
+//            FieldError error = bindingResult.getFieldError();
+            // Lấy thông báo lỗi theo locale
+//            return messageSource.getMessage(error, locale);
+        } else {
+            User newUser = new User();
+
+            newUser.setUserName(user.getUserName());
+            newUser.setPassword(user.getPassword());
+            newUser.setEmail(user.getEmail());
+            newUser.setStatus(1);
+            newUser.setGender(2);
+
+            userRepository.save(newUser);
+        }
+
+        // Nếu hợp lệ thì xử lý logic tiếp
+        return "True";
     }
 
     // exist user name
