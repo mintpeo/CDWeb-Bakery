@@ -2,6 +2,8 @@ package com.example.fullstackweb.service;
 
 import com.example.fullstackweb.dto.LoginResponse;
 import com.example.fullstackweb.dto.UserDTO;
+import com.example.fullstackweb.dto.UserPasswordUpdateDTO;
+import com.example.fullstackweb.dto.UserUpdateDTO;
 import com.example.fullstackweb.models.User;
 import com.example.fullstackweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ public class UserService {
 
     @Autowired
     private MessageSource messageSource;
+
 //    public Optional<User> getInfoUser(Long id) {
 //        return userRepository.findById(id);
 //    }
@@ -71,31 +74,45 @@ public class UserService {
     }
 
     // create with validation
-    public String register(User user, BindingResult bindingResult) {
-//        String lang;
-//        Locale locale = Locale.forLanguageTag(lang);
+//    public String register(User user, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            // Lấy lỗi đầu tiên để đơn giản
+//            return bindingResult.getFieldError().getDefaultMessage();
+//        } else {
+//            User newUser = new User();
+//
+//            newUser.setUserName(user.getUserName());
+//            newUser.setPassword(user.getPassword());
+//            newUser.setEmail(user.getEmail());
+//            newUser.setStatus(1);
+//            newUser.setGender(2);
+//
+//            userRepository.save(newUser);
+//        }
+//        // Nếu hợp lệ thì xử lý logic tiếp
+//        return "True";
+//    }
+
+    public String register(User user, BindingResult bindingResult, String lang) {
+        Locale locale = Locale.forLanguageTag(lang);
 
         if (bindingResult.hasErrors()) {
-            // Lấy lỗi đầu tiên để đơn giản
-            return bindingResult.getFieldError().getDefaultMessage();
-//            FieldError error = bindingResult.getFieldError();
-            // Lấy thông báo lỗi theo locale
-//            return messageSource.getMessage(error, locale);
+            FieldError error = bindingResult.getFieldError();
+            if (error != null) {
+                return messageSource.getMessage(error, locale); // lấy theo locale
+            }
         } else {
             User newUser = new User();
-
             newUser.setUserName(user.getUserName());
             newUser.setPassword(user.getPassword());
             newUser.setEmail(user.getEmail());
             newUser.setStatus(1);
             newUser.setGender(2);
-
             userRepository.save(newUser);
         }
-
-        // Nếu hợp lệ thì xử lý logic tiếp
         return "True";
     }
+
 
     // exist user name
     public Boolean checkUserName(String userName) {
@@ -123,18 +140,44 @@ public class UserService {
 
 
     // update user
-    public User updateUser(Long userId, User user) throws Exception {
+//    public User updateUser(Long userId, User user) throws Exception {
+//        Optional<User> userById = userRepository.findById(userId);
+//        if (userById.isEmpty()) throw new Exception("User not found: " + userId);
+//
+//        User oldUser = userById.get();
+//        oldUser.setEmail(user.getEmail());
+//        oldUser.setFullName(user.getFullName());
+//        oldUser.setNumberPhone(user.getNumberPhone());
+//        oldUser.setGender(user.getGender());
+//        oldUser.setDate(user.getDate());
+//
+//        return userRepository.save(oldUser);
+//    }
+
+    public String updateUser(Long userId, UserUpdateDTO userUpdateDTO, BindingResult bindingResult, String lang) throws Exception {
         Optional<User> userById = userRepository.findById(userId);
-        if (userById.isEmpty()) throw new Exception("User not found: " + userId);
+        if (userById.isEmpty()) {
+            throw new Exception("User not found: " + userId);
+        } else {
+            Locale locale = Locale.forLanguageTag(lang);
 
-        User oldUser = userById.get();
-        oldUser.setEmail(user.getEmail());
-        oldUser.setFullName(user.getFullName());
-        oldUser.setNumberPhone(user.getNumberPhone());
-        oldUser.setGender(user.getGender());
-        oldUser.setDate(user.getDate());
+            if (bindingResult.hasErrors()) {
+                FieldError error = bindingResult.getFieldError();
+                if (error != null) {
+                    return messageSource.getMessage(error, locale); // lấy theo locale
+                }
+            } else {
+                User oldUser = userById.get();
+                oldUser.setEmail(userUpdateDTO.getEmail());
+                oldUser.setFullName(userUpdateDTO.getFullName());
+                oldUser.setNumberPhone(userUpdateDTO.getNumberPhone());
+                oldUser.setGender(userUpdateDTO.getGender());
+                oldUser.setDate(userUpdateDTO.getDate());
+                userRepository.save(oldUser);
+            }
+        }
 
-        return userRepository.save(oldUser);
+        return "True";
     }
 
     // update avatar
@@ -149,15 +192,35 @@ public class UserService {
     }
 
     // updata pass
-    public Boolean updatePass(Long userId, String oldPass, String newPass) {
+//    public Boolean updatePass(Long userId, String oldPass, String newPass) {
+//        Optional<User> userById = userRepository.findById(userId);
+//        if (userById.isPresent() && userById.get().getPassword().equals(oldPass)) { // kiem tra password
+//            User oldUser = userById.get();
+//            oldUser.setPassword(newPass);
+//            userRepository.save(oldUser);
+//            return true;
+//        }
+//        return false;
+//    }
+
+    public String updatePass(Long userId, UserPasswordUpdateDTO userPasswordUpdateDTO, BindingResult bindingResult, String lang) {
         Optional<User> userById = userRepository.findById(userId);
-        if (userById.isPresent() && userById.get().getPassword().equals(oldPass)) { // kiem tra password
-            User oldUser = userById.get();
-            oldUser.setPassword(newPass);
-            userRepository.save(oldUser);
-            return true;
+        if (userById.isPresent() && userById.get().getPassword().equals(userPasswordUpdateDTO.getOldPassword())) {
+            Locale locale = Locale.forLanguageTag(lang);
+
+            if (bindingResult.hasErrors()) {
+                FieldError error = bindingResult.getFieldError();
+                if (error != null) {
+                    return messageSource.getMessage(error, locale); // lấy theo locale
+                }
+            } else {
+                User oldUser = userById.get();
+                oldUser.setPassword(userPasswordUpdateDTO.getNewPassword());
+                userRepository.save(oldUser);
+                return "True";
+            }
         }
-        return false;
+        return "False";
     }
 
     // update address default

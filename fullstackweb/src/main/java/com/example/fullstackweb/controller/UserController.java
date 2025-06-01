@@ -1,6 +1,8 @@
 package com.example.fullstackweb.controller;
 
 import com.example.fullstackweb.dto.UserDTO;
+import com.example.fullstackweb.dto.UserPasswordUpdateDTO;
+import com.example.fullstackweb.dto.UserUpdateDTO;
 import com.example.fullstackweb.models.User;
 import com.example.fullstackweb.repository.UserRepository;
 import com.example.fullstackweb.service.UserService;
@@ -32,15 +34,15 @@ public class UserController {
         return userService.getInfoUser(id);
     }
 
-    @PostMapping("/create")
-    public Boolean createUser(@RequestBody User user) {
-        return userService.createUser(user);
-    }
+//    @PostMapping("/create")
+//    public Boolean createUser(@RequestBody User user) {
+//        return userService.createUser(user);
+//    }
 
     // create with validation
     @PostMapping(value = "/vali", produces = "text/plain;charset=UTF-8")
-    public String createVali (@Valid @RequestBody User user, BindingResult bindingResult) {
-        return userService.register(user, bindingResult);
+    public String createVali (@Valid @RequestBody User user, BindingResult bindingResult, @RequestParam String lang) {
+        return userService.register(user, bindingResult, lang);
     }
 
     @GetMapping("/check")
@@ -59,9 +61,12 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public User updateUser(@RequestParam Long userId, @RequestBody User user) throws Exception {
-        return userService.updateUser(userId, user);
+    public String updateUser(@RequestParam Long userId, @Valid @RequestBody UserUpdateDTO user, BindingResult bindingResult, @RequestParam String lang) throws Exception {
+        return userService.updateUser(userId, user, bindingResult, lang);
     }
+//    public User updateUser(@RequestParam Long userId, @RequestBody User user) throws Exception {
+//        return userService.updateUser(userId, user, bindingResult, lang);
+//    }
 
     @PutMapping("/updateAvatar")
     public User updateAvatar(@RequestParam Long userId, @RequestBody User user) throws Exception {
@@ -69,9 +74,12 @@ public class UserController {
     }
 
     @PutMapping("/updatePass")
-    public Boolean updatePass(@RequestParam Long userId, String oldPass, String newPass) {
-        return userService.updatePass(userId, oldPass, newPass);
+    public String updatePass(@RequestParam Long userId, @Valid @RequestBody UserPasswordUpdateDTO user, BindingResult bindingResult, @RequestParam String lang) throws Exception {
+        return userService.updatePass(userId, user, bindingResult, lang);
     }
+//    public Boolean updatePass(@RequestParam Long userId, String oldPass, String newPass) {
+//        return userService.updatePass(userId, oldPass, newPass);
+//    }
 
     @PutMapping("/updateAddressDefault")
     public Boolean updateAddressDefault(@RequestParam Long userId, Long addressDefaultId) throws Exception {
